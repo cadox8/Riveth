@@ -1,0 +1,11 @@
+# General Messages
+
+NoPerms: '&cYou do not have permissions to do that'
+TooMuchArgs: '&cToo much arguments'
+
+# More Specific Messages
+
+# %god% -> &2Enabled / &cDisabled
+God:
+  Yourself: '&6God mode: %god%'
+  Others: '&6You %god% god mode to &d%target%'

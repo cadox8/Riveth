@@ -1,0 +1,4 @@
+name: ${project.artifactId}
+main: me.cadox8.riveth.Riveth
+version: ${project.version}
+author: cadox8
