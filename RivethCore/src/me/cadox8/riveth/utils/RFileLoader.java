@@ -45,7 +45,7 @@ public class RFileLoader {
 
         InputStream defStream = plugin.getResource("lang.yml");
         if (defStream != null) {
-            YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defStream);
+            YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(langFile);
             lang.setDefaults(defConfig);
         }
     }
