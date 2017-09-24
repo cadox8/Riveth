@@ -2,7 +2,7 @@ package me.cadox8.riveth;
 
 import me.cadox8.riveth.api.RServer;
 import me.cadox8.riveth.api.RUser;
-import me.cadox8.riveth.cmd.RCmd;
+import me.cadox8.riveth.cmd.*;
 import me.cadox8.riveth.utils.Log;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -28,7 +28,13 @@ public class RivethCommands implements TabCompleter {
     private static String name = "riveth:";
 
     public static void load() {
-
+        cmds.add(new BreakCMD());
+        cmds.add(new FeedCMD());
+        cmds.add(new GamemodeCMD());
+        cmds.add(new GodCMD());
+        cmds.add(new HealCMD());
+        cmds.add(new HelpCMD());
+        cmds.add(new SuicideCMD());
         //
         ucmds = new RivethCommands();
         //

@@ -47,10 +47,17 @@ public abstract class RCmd {
     }
 
     public void run(CommandSender sender, String label, String[] args) {
-        sender.sendMessage(Riveth.getMessage("NoPerms"));
+        sender.sendMessage("*NoPerms");
     }
 
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args, String curs, Integer curn) {
         return new ArrayList<>();
+    }
+
+    public void argsProblems(RUser u) {
+        u.sendMessage("*ArgsError");
+    }
+    public void notOnline(RUser u, String target) {
+        u.sendMessage("&6" + target + " &cdoesn't exists or it's not online");
     }
 }

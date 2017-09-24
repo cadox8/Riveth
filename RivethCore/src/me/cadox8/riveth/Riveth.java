@@ -53,8 +53,4 @@ public class Riveth extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
         }
     }
-
-    public static String getMessage(String search) {
-        return Utils.colorize(RFileLoader.getLang().getString(search));
-    }
 }

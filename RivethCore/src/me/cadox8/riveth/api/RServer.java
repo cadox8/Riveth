@@ -23,4 +23,8 @@ public class RServer {
     public static RUser getUser(OfflinePlayer p) {
         return getUser(p.getUniqueId());
     }
+
+    public static void broadcast(String msg, Object... objects) {
+        users.forEach(u -> u.sendMessage(msg, objects));
+    }
 }

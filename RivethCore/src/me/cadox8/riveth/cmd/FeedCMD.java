@@ -3,16 +3,16 @@ package me.cadox8.riveth.cmd;
 import me.cadox8.riveth.api.RServer;
 import me.cadox8.riveth.api.RUser;
 
-public class GodCMD extends RCmd {
+public class FeedCMD extends RCmd {
 
-    public GodCMD() {
-        super("god", "god");
+    public FeedCMD() {
+        super("feed", "feed", "eat");
     }
 
     public void run(RUser u, String label, String... args) {
         switch (args.length) {
             case 0:
-                u.setGod();
+                u.getPlayer().setFoodLevel(20);
                 break;
             case 1:
                 RUser target = RServer.getUser(plugin.getServer().getPlayerExact(args[0]));
@@ -21,8 +21,7 @@ public class GodCMD extends RCmd {
                     notOnline(u, args[0]);
                     return;
                 }
-                target.setGod();
-                u.sendMessage("*God.Others");
+                target.getPlayer().setFoodLevel(20);
                 break;
 
             default:

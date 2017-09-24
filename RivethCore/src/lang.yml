@@ -1,7 +1,7 @@
 # General Messages
 
 NoPerms: '&cYou do not have permissions to do that'
-TooMuchArgs: '&cToo much arguments'
+ArgsError: '&cArgs error'
 
 # More Specific Messages
 
@@ -9,3 +9,13 @@ TooMuchArgs: '&cToo much arguments'
 God:
   Yourself: '&6God mode: %god%'
   Others: '&6You %god% god mode to &d%target%'
+
+Health:
+  Own: '&6You have been healed'
+  Others: '&6You healed &c%player%'
+
+Suicide:
+  Own: '&7Goodbye cruel world...'
+  BC: '&c%player% &6took his life'
+
+Gamemode: '&6Your gamemode has been changed to &c%gm%'

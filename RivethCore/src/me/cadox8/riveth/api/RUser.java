@@ -8,6 +8,7 @@ import me.cadox8.riveth.utils.RFileLoader;
 import me.cadox8.riveth.utils.Utils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.net.InetSocketAddress;
 import java.util.UUID;
@@ -28,6 +29,12 @@ public class RUser {
         setUserData(plugin.getMysql().loadUserData(uuid));
     }
 
+    public void save() {
+        plugin.getMysql().saveUser(this);
+        RServer.users.remove(this);
+        plugin.getMysql().loadUserData(uuid);
+        RServer.users.add(this);
+    }
 
     public Player getPlayer() {
         return plugin.getServer().getPlayer(uuid);
@@ -40,8 +47,29 @@ public class RUser {
     }
 
 
-    public void sendMessage(String msg) {
-        getPlayer().sendMessage(Riveth.getPrefix() + Utils.colorize(msg));
+    public void sendMessage(String msg, Object... objects) {
+        String finalMsg = msg;
+
+        if (msg.startsWith("*")) {
+            finalMsg = RFileLoader.getLang().getString(msg.substring(1));
+
+            if (objects != null) {
+                String[] split = finalMsg.split(" ");
+                String[] ph = {};
+                int id = 0;
+                for (String s : split) {
+                    if (s.startsWith("%") && s.endsWith("%")) ph[id] = s;
+                    id++;
+                }
+                id--;
+                for (Object o : objects) {
+                    finalMsg.replace(ph[id], o.toString());
+                    id--;
+                    if (id == 0) break;
+                }
+            }
+        }
+        getPlayer().sendMessage(Riveth.getPrefix() + Utils.colorize(finalMsg));
     }
     public void sendRawMessage(String msg) {
         getPlayer().sendMessage(Utils.colorize(msg));
@@ -56,7 +84,18 @@ public class RUser {
 
     public void setGod() {
         getUserData().setGod(!getUserData().getGod());
-        sendMessage(Riveth.getMessage("God.Yourself").replace("%god%", getUserData().getGod() ? "&2enabled" : "&cdisabled"));
+        sendMessage("*God.Yourself", getUserData().getGod() ? "&2enabled" : "&cdisabled");
+        save();
+    }
+
+    public void suicide() {
+        EntityDamageEvent e = new EntityDamageEvent(getPlayer(), EntityDamageEvent.DamageCause.SUICIDE, Short.MAX_VALUE);
+        plugin.getServer().getPluginManager().callEvent(e);
+        getPlayer().damage(Short.MAX_VALUE);
+        if (getPlayer().getHealth() > 0) getPlayer().setHealth(0);
+
+        sendMessage("*Suicide.Own");
+        RServer.broadcast("*Suicide.BC", getName());
     }
 
     @Data
