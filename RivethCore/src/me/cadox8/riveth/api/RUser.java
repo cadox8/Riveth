@@ -45,6 +45,12 @@ public class RUser {
     public String getName() {
         return getOfflinePlayer().getName();
     }
+    public boolean hasPermission(String perm) {
+        return getPlayer().hasPermission(perm);
+    }
+    public boolean isOnline() {
+        return getOfflinePlayer().isOnline();
+    }
 
 
     public void sendMessage(String msg, Object... objects) {
@@ -71,19 +77,13 @@ public class RUser {
         }
         getPlayer().sendMessage(Riveth.getPrefix() + Utils.colorize(finalMsg));
     }
+
     public void sendRawMessage(String msg) {
         getPlayer().sendMessage(Utils.colorize(msg));
     }
-    public boolean hasPermission(String perm) {
-        return getPlayer().hasPermission(perm);
-    }
-    public boolean isOnline() {
-        return getOfflinePlayer().isOnline();
-    }
 
-
-    public void setGod() {
-        getUserData().setGod(!getUserData().getGod());
+    public void setGod(boolean god) {
+        getUserData().setGod(god);
         sendMessage("*God.Yourself", getUserData().getGod() ? "&2enabled" : "&cdisabled");
         save();
     }

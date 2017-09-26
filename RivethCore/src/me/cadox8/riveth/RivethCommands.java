@@ -32,8 +32,11 @@ public class RivethCommands implements TabCompleter {
         cmds.add(new FeedCMD());
         cmds.add(new GamemodeCMD());
         cmds.add(new GodCMD());
+        cmds.add(new HatCMD());
         cmds.add(new HealCMD());
         cmds.add(new HelpCMD());
+        cmds.add(new HelpOPCMD());
+        cmds.add(new KitCMD());
         cmds.add(new SuicideCMD());
         //
         ucmds = new RivethCommands();
