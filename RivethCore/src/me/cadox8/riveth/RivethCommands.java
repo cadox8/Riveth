@@ -3,6 +3,8 @@ package me.cadox8.riveth;
 import me.cadox8.riveth.api.RServer;
 import me.cadox8.riveth.api.RUser;
 import me.cadox8.riveth.cmd.*;
+import me.cadox8.riveth.cmd.invs.AnvilCMD;
+import me.cadox8.riveth.cmd.invs.WorkbenchCMD;
 import me.cadox8.riveth.utils.Log;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -30,6 +32,7 @@ public class RivethCommands implements TabCompleter {
     public static void load() {
         cmds.add(new BreakCMD());
         cmds.add(new FeedCMD());
+        cmds.add(new FlyCMD());
         cmds.add(new GamemodeCMD());
         cmds.add(new GodCMD());
         cmds.add(new HatCMD());
@@ -37,7 +40,12 @@ public class RivethCommands implements TabCompleter {
         cmds.add(new HelpCMD());
         cmds.add(new HelpOPCMD());
         cmds.add(new KitCMD());
+        cmds.add(new RepairCMD());
+        cmds.add(new SkullCMD());
         cmds.add(new SuicideCMD());
+
+        cmds.add(new WorkbenchCMD());
+        cmds.add(new AnvilCMD());
         //
         ucmds = new RivethCommands();
         //

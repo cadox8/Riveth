@@ -1,24 +1,23 @@
 package me.cadox8.riveth.kits;
 
 import lombok.Getter;
-import lombok.Setter;
 import me.cadox8.riveth.Riveth;
 import me.cadox8.riveth.api.RUser;
-import me.cadox8.riveth.utils.Utils;
-import org.bukkit.entity.Item;
+import me.cadox8.riveth.utils.ItemUtils;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class Kit {
 
     public static List<Kit> kits = new ArrayList<>();
 
     public static final Kit DEV_KIT = new Kit("Dev kit",
-            Arrays.asList(Utils.createHeadPlayer("cadox8", "cadox8's Head", Arrays.asList("&cRiveth's Developer"))));
+            Arrays.asList(ItemUtils.createPlayerHead("cadox8's Head", UUID.fromString("c56cace3-5701-4754-8c15-948f64e4978e"), Arrays.asList("&cRiveth's Developer"))));
 
     @Getter private String name;
     @Getter private List<ItemStack> items;

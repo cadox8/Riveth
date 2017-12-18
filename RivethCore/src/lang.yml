@@ -18,5 +18,9 @@ Suicide:
   Own: '&7Goodbye cruel world...'
   BC: '&c%player% &6took his life'
 
+Fly:
+  Own: '&6Fly mode &c%fly%'
+  Others: '&6Fly mode &c%fly% for &d%target%'
+
 Gamemode: '&6Your gamemode has been changed to &c%gm%'
 Hat: '&6Enjoy your new hat ^^'

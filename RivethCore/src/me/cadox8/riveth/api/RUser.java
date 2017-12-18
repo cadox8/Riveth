@@ -9,6 +9,7 @@ import me.cadox8.riveth.utils.Utils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.PlayerInventory;
 
 import java.net.InetSocketAddress;
 import java.util.UUID;
@@ -51,8 +52,38 @@ public class RUser {
     public boolean isOnline() {
         return getOfflinePlayer().isOnline();
     }
+    public PlayerInventory getInventory() {
+        return getPlayer().getInventory();
+    }
+
+    public void sendRawMessage(String msg) {
+        getPlayer().sendMessage(Utils.colorize(msg));
+    }
+
+    public void setGod(boolean god) {
+        getUserData().setGod(god);
+        sendMessage("*God.Yourself", getUserData().getGod() ? "&2enabled" : "&cdisabled");
+        save();
+    }
+
+    public void suicide() {
+        EntityDamageEvent e = new EntityDamageEvent(getPlayer(), EntityDamageEvent.DamageCause.SUICIDE, Short.MAX_VALUE);
+        plugin.getServer().getPluginManager().callEvent(e);
+        getPlayer().damage(Short.MAX_VALUE);
+        if (getPlayer().getHealth() > 0) getPlayer().setHealth(0);
+
+        sendMessage("*Suicide.Own");
+        RServer.broadcast("*Suicide.BC", getName());
+    }
+
+    public void toggleFly() {
+        getPlayer().setAllowFlight(!getPlayer().getAllowFlight());
+        sendMessage("*Fly.Own", Utils.boleanToText(getPlayer().getAllowFlight()));
+    }
 
 
+
+    //
     public void sendMessage(String msg, Object... objects) {
         String finalMsg = msg;
 
@@ -77,26 +108,7 @@ public class RUser {
         }
         getPlayer().sendMessage(Riveth.getPrefix() + Utils.colorize(finalMsg));
     }
-
-    public void sendRawMessage(String msg) {
-        getPlayer().sendMessage(Utils.colorize(msg));
-    }
-
-    public void setGod(boolean god) {
-        getUserData().setGod(god);
-        sendMessage("*God.Yourself", getUserData().getGod() ? "&2enabled" : "&cdisabled");
-        save();
-    }
-
-    public void suicide() {
-        EntityDamageEvent e = new EntityDamageEvent(getPlayer(), EntityDamageEvent.DamageCause.SUICIDE, Short.MAX_VALUE);
-        plugin.getServer().getPluginManager().callEvent(e);
-        getPlayer().damage(Short.MAX_VALUE);
-        if (getPlayer().getHealth() > 0) getPlayer().setHealth(0);
-
-        sendMessage("*Suicide.Own");
-        RServer.broadcast("*Suicide.BC", getName());
-    }
+    //
 
     @Data
     public static class UserData {
@@ -104,5 +116,7 @@ public class RUser {
         Long lastConnect = 0L;
         String nickname = null;
         InetSocketAddress ip = null;
+
+        double money = 0;
     }
 }

@@ -3,13 +3,6 @@ package me.cadox8.riveth.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Utils {
 
@@ -37,21 +30,6 @@ public class Utils {
         return loc;
     }
 
-    public static ItemStack createHeadPlayer(String displayname, String username, List<String> lore) {
-        ItemStack playerHead = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-        SkullMeta sm = (SkullMeta) playerHead.getItemMeta();
-        sm.setOwner(username);
-        ArrayList<String> colorLore = new ArrayList<>();
-        if (lore != null) {
-            lore.forEach(str -> colorLore.add(Utils.colorize(str)));
-            sm.setLore(colorLore);
-        }
-
-        sm.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_UNBREAKABLE);
-        sm.setDisplayName(Utils.colorize(displayname));
-        playerHead.setItemMeta(sm);
-        return playerHead;
-    }
 
     public static String buildString(String[] args) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -60,5 +38,10 @@ public class Utils {
             stringBuilder.append(args[i]);
         }
         return stringBuilder.toString();
+    }
+
+    public static String boleanToText(boolean b) {
+        if (b) return "Enabled";
+        return "Disabled";
     }
 }
