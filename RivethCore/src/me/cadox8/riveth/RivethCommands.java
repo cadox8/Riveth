@@ -4,6 +4,8 @@ import me.cadox8.riveth.api.RServer;
 import me.cadox8.riveth.api.RUser;
 import me.cadox8.riveth.cmd.*;
 import me.cadox8.riveth.cmd.invs.AnvilCMD;
+import me.cadox8.riveth.cmd.invs.EnchantTableCMD;
+import me.cadox8.riveth.cmd.invs.FurnaceCMD;
 import me.cadox8.riveth.cmd.invs.WorkbenchCMD;
 import me.cadox8.riveth.utils.Log;
 import org.apache.commons.lang.StringUtils;
@@ -39,6 +41,7 @@ public class RivethCommands implements TabCompleter {
         cmds.add(new HealCMD());
         cmds.add(new HelpCMD());
         cmds.add(new HelpOPCMD());
+        cmds.add(new InvSeeCMD());
         cmds.add(new KitCMD());
         cmds.add(new RepairCMD());
         cmds.add(new SkullCMD());
@@ -46,6 +49,8 @@ public class RivethCommands implements TabCompleter {
 
         cmds.add(new WorkbenchCMD());
         cmds.add(new AnvilCMD());
+        cmds.add(new EnchantTableCMD());
+        cmds.add(new FurnaceCMD());
         //
         ucmds = new RivethCommands();
         //

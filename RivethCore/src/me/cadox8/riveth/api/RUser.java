@@ -6,6 +6,7 @@ import lombok.Setter;
 import me.cadox8.riveth.Riveth;
 import me.cadox8.riveth.utils.RFileLoader;
 import me.cadox8.riveth.utils.Utils;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -54,6 +55,12 @@ public class RUser {
     }
     public PlayerInventory getInventory() {
         return getPlayer().getInventory();
+    }
+
+    //
+
+    public void teleport(Location l) {
+        getPlayer().teleport(l);
     }
 
     public void sendRawMessage(String msg) {

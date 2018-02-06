@@ -24,3 +24,8 @@ Fly:
 
 Gamemode: '&6Your gamemode has been changed to &c%gm%'
 Hat: '&6Enjoy your new hat ^^'
+
+Spawn:
+  Wait: '&6You will be teleported in &c%time%'
+  Own: '&6Teleported to spawn'
+  Others: '&c%player% &6took his life'

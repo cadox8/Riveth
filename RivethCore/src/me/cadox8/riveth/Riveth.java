@@ -1,35 +1,38 @@
 package me.cadox8.riveth;
 
 import lombok.Getter;
+import lombok.Setter;
 import me.cadox8.riveth.utils.Log;
 import me.cadox8.riveth.utils.MySQL;
 import me.cadox8.riveth.utils.RFileLoader;
 import me.cadox8.riveth.utils.Utils;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Riveth extends JavaPlugin {
 
     @Getter private static Riveth instance;
+
     @Getter private static String prefix = Utils.colorize(" &7|| &cRiveth &7|| ");
+    @Getter @Setter private static boolean debug;
 
     @Getter private MySQL mysql = null;
 
     @Override
     public void onEnable() {
         instance = this;
+        setDebug(false);
 
-        RFileLoader.load();
-        loadMySQL();
-
-        RivethCommands.load();
+        registerClasses();
     }
 
     private void registerClasses() {
+        RFileLoader.load();
 
+        loadMySQL();
+
+        RivethCommands.load();
     }
 
     private void registerEvents() {
@@ -47,9 +50,9 @@ public class Riveth extends JavaPlugin {
             mysql = new MySQL(host, port, user, pass, db);
             mysql.openConnection();
         } catch (SQLException | ClassNotFoundException exc) {
-            getLogger().severe("Error while connecting with MySQL");
+            Log.log(Log.Level.ERROR,"Error while connecting with MySQL");
             Log.debugLog("Cause: " + exc.toString());
-            getLogger().severe("Riveth disabled");
+            Log.log(Log.Level.ERROR,"Riveth disabled");
             getServer().getPluginManager().disablePlugin(this);
         }
     }

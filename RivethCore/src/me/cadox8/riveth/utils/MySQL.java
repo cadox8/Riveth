@@ -6,12 +6,12 @@ import me.cadox8.riveth.api.RUser;
 import org.bukkit.entity.Player;
 
 import java.sql.*;
-import java.util.*;
+import java.util.UUID;
 
 /**
  * Object for MySQL connexions
  *
- * @author Huskehhh, Cadiducho update
+ * @author Huskehhh, Cadiducho & Cadox8 update
  */
 
 public class MySQL {

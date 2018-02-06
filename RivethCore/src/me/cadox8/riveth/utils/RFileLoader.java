@@ -1,11 +1,11 @@
 package me.cadox8.riveth.utils;
 
-import java.io.File;
-import java.io.InputStream;
-
 import me.cadox8.riveth.Riveth;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.io.File;
+import java.io.InputStream;
 
 public class RFileLoader {
 
@@ -24,6 +24,7 @@ public class RFileLoader {
                 Log.log(Log.Level.ERROR, "Error while creating config.yml! Cause: " + e.toString());
             }
         }
+
         File lf = new File(plugin.getDataFolder(), "lang.yml");
         if (!lf.exists()) {
             try {

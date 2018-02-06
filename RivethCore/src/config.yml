@@ -1,6 +1,18 @@
+#########################
+##    Riveth Config    ##
+#########################
+
+# MySQL Settings
 MySQL:
   host: localhost
   port: 3306
   user: root
   pass: password
   db: riveth
+
+# Spawn Settings
+Spawn:
+  spawnLoc: world%0.0%100.0%0.0
+  spawnOnJoin: false
+  allowSpawn: false
+  waitTime: 5 # Set this to -1 to disable

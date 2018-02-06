@@ -26,7 +26,7 @@ public class Kit {
     public Kit() {}
 
     /**
-     * To create custom kits from the plugin
+     * Create custom kits from plugins
      * */
     public Kit(String name, List<ItemStack> items) {
         this.name = name;
