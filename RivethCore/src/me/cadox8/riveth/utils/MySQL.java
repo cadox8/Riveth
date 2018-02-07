@@ -3,7 +3,6 @@ package me.cadox8.riveth.utils;
 import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
 import me.cadox8.riveth.Riveth;
 import me.cadox8.riveth.api.RUser;
-import org.bukkit.entity.Player;
 
 import java.sql.*;
 import java.util.UUID;
@@ -15,6 +14,8 @@ import java.util.UUID;
  */
 
 public class MySQL {
+
+    private Riveth plugin = Riveth.getInstance();
 
     protected Connection connection;
 
@@ -52,18 +53,20 @@ public class MySQL {
     }
 
     // -----------------
-    public void setupTable(Player p) {
-        Riveth.getInstance().getServer().getScheduler().runTaskAsynchronously(Riveth.getInstance(), () -> {
+    public void setupTable(RUser p) {
+        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
                 PreparedStatement statement = openConnection().prepareStatement("SELECT `id` FROM `riveth_data` WHERE `uuid` = ?");
-                statement.setString(1, p.getUniqueId().toString());
+                statement.setString(1, p.getUuid().toString());
                 ResultSet rs = statement.executeQuery();
 
                 if (!rs.next()) {
                     PreparedStatement inserDatos = openConnection().prepareStatement("INSERT INTO `riveth_data` (`uuid`, `name`) VALUES (?, ?)");
-                    inserDatos.setString(1, p.getUniqueId().toString());
+                    inserDatos.setString(1, p.getUuid().toString());
                     inserDatos.setString(2, p.getName());
                     inserDatos.executeUpdate();
+
+                    p.sendMessage(plugin.getConfig().getString("JL.newbie"));
                 }
             } catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
@@ -72,12 +75,12 @@ public class MySQL {
     }
 
     public void saveUser(RUser u) {
-        Riveth.getInstance().getServer().getScheduler().runTaskAsynchronously(Riveth.getInstance(), () -> {
+        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
             RUser.UserData data = u.getUserData();
             try {
 
                 PreparedStatement statementDatos = openConnection().prepareStatement("UPDATE `riveth_data` SET `god`=?,`lastConnect`=?,`ip`=?,`nick`=? WHERE `uuid`=?");
-                statementDatos.setBoolean(1, data.getGod() == null ? false : data.getGod());
+                statementDatos.setInt(1, data.getGod() == null ? 0 : data.getGod());
                 statementDatos.setTimestamp(2, new java.sql.Timestamp(new java.util.Date().getTime()));
                 statementDatos.setString(3, data.getIp() == null ? "" : data.getIp().getAddress().getHostAddress());
                 statementDatos.setString(4, data.getNickname() == null ? "" : data.getNickname());
@@ -100,7 +103,7 @@ public class MySQL {
             ResultSet rsDatos = statementDatos.executeQuery();
 
             if (rsDatos.next()) {
-                data.setGod(rsDatos.getBoolean("god"));
+                data.setGod(rsDatos.getInt("god"));
                 data.setNickname(rsDatos.getString("nick"));
                 data.setLastConnect(rsDatos.getLong("lastConnect"));
             }

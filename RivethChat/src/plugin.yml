@@ -1,0 +1,5 @@
+name: ${project.artifactId}
+main: me.cadox8.riveth.chat.RivethChat
+version: ${project.version}
+author: cadox8
+depend: [RivethCore]

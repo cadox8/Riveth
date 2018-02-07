@@ -12,7 +12,7 @@ public class GodCMD extends RCmd {
     public void run(RUser u, String label, String... args) {
         switch (args.length) {
             case 0:
-                u.setGod(!u.getUserData().getGod());
+                u.setGod(u.getUserData().getGod() == 1 ? 0 : 1);
                 break;
             case 1:
                 RUser target = RServer.getUser(plugin.getServer().getPlayerExact(args[0]));
@@ -21,12 +21,12 @@ public class GodCMD extends RCmd {
                     notOnline(u, args[0]);
                     return;
                 }
-                target.setGod(!u.getUserData().getGod());
+                target.setGod(target.getUserData().getGod() == 1 ? 0 : 1);
                 u.sendMessage("*God.Others");
                 break;
             case 2:
                 if (!args[1].equalsIgnoreCase("on") || !args[1].equalsIgnoreCase("off")) {
-
+                    u.sendMessage("Error");
                     return;
                 }
                 RUser target2 = RServer.getUser(plugin.getServer().getPlayerExact(args[0]));
@@ -36,7 +36,7 @@ public class GodCMD extends RCmd {
                     return;
                 }
 
-                target2.setGod(args[1].equalsIgnoreCase("on"));
+                target2.setGod(args[1].equalsIgnoreCase("on") ? 1 : 0);
                 u.sendMessage("*God.Others");
             default:
                 argsProblems(u);

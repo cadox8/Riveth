@@ -33,9 +33,9 @@ public class RUser {
 
     public void save() {
         plugin.getMysql().saveUser(this);
-        RServer.users.remove(this);
+        RServer.removeUser(this);
         plugin.getMysql().loadUserData(uuid);
-        RServer.users.add(this);
+        RServer.getUser(getUuid());
     }
 
     public Player getPlayer() {
@@ -56,6 +56,9 @@ public class RUser {
     public PlayerInventory getInventory() {
         return getPlayer().getInventory();
     }
+    public Location getLocation() {
+        return getPlayer().getLocation();
+    }
 
     //
 
@@ -67,9 +70,9 @@ public class RUser {
         getPlayer().sendMessage(Utils.colorize(msg));
     }
 
-    public void setGod(boolean god) {
+    public void setGod(int god) {
         getUserData().setGod(god);
-        sendMessage("*God.Yourself", getUserData().getGod() ? "&2enabled" : "&cdisabled");
+        sendMessage("*God.Yourself", getUserData().getGod() == 1 ? "&2enabled" : "&cdisabled");
         save();
     }
 
@@ -81,6 +84,15 @@ public class RUser {
 
         sendMessage("*Suicide.Own");
         RServer.broadcast("*Suicide.BC", getName());
+    }
+
+    public void kill() {
+        EntityDamageEvent e = new EntityDamageEvent(getPlayer(), EntityDamageEvent.DamageCause.SUICIDE, Short.MAX_VALUE);
+        plugin.getServer().getPluginManager().callEvent(e);
+        getPlayer().damage(Short.MAX_VALUE);
+        if (getPlayer().getHealth() > 0) getPlayer().setHealth(0);
+
+        sendMessage("*Suicide.Own");
     }
 
     public void toggleFly() {
@@ -119,10 +131,11 @@ public class RUser {
 
     @Data
     public static class UserData {
-        Boolean god = false;
         Long lastConnect = 0L;
         String nickname = null;
         InetSocketAddress ip = null;
+
+        Integer god = 0;
 
         double money = 0;
     }

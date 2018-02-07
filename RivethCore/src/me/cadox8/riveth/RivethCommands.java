@@ -34,6 +34,7 @@ public class RivethCommands implements TabCompleter {
     public static void load() {
         cmds.add(new BreakCMD());
         cmds.add(new FeedCMD());
+        cmds.add(new FireworkCMD());
         cmds.add(new FlyCMD());
         cmds.add(new GamemodeCMD());
         cmds.add(new GodCMD());
@@ -42,6 +43,7 @@ public class RivethCommands implements TabCompleter {
         cmds.add(new HelpCMD());
         cmds.add(new HelpOPCMD());
         cmds.add(new InvSeeCMD());
+        cmds.add(new KillCMD());
         cmds.add(new KitCMD());
         cmds.add(new RepairCMD());
         cmds.add(new SkullCMD());
