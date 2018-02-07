@@ -1,0 +1,39 @@
+########################################
+##           Riveth Config            ##
+########################################
+
+# WARNING: do not remove any ' from the config or you will get a crash
+
+# MySQL Settings
+MySQL:
+  host: localhost
+  port: 3306
+  user: root
+  pass: password
+  db: riveth
+
+# Join / Leave Messages
+# %player% will transform to player's name
+JL:
+  newbie: '&dWelcome &c%player% &dto &6ServerName'
+  join: '&c%player% &6has joined'
+  leave: '&c%player% &6has left'
+
+# Spawn Settings
+Spawn:
+  spawnLoc: world%0.0%100.0%0.0
+  spawnOnJoin: false
+  allowSpawn: false
+  waitTime: 5 # Set this to -1 to disable
+
+
+########################################
+##         Riveth Chat Config         ##
+########################################
+
+# You can use colors! (& + color code)
+# %prefix% => Player's Rank | %player% => Player's name | %nick% => Player's Nick
+# Example: [%prefix%] &c%player%&r:
+Chat:
+  enable: true
+  pattern: '[%prefix%] &c%player%&r:'

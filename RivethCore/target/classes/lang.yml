@@ -1,0 +1,31 @@
+# General Messages
+
+NoPerms: '&cYou do not have permissions to do that'
+ArgsError: '&cArgs error'
+
+# More Specific Messages
+
+# %god% -> &2Enabled / &cDisabled
+God:
+  Yourself: '&6God mode: %god%'
+  Others: '&6You %god% god mode to &d%target%'
+
+Health:
+  Own: '&6You have been healed'
+  Others: '&6You healed &c%player%'
+
+Suicide:
+  Own: '&7Goodbye cruel world...'
+  BC: '&c%player% &6took his life'
+
+Fly:
+  Own: '&6Fly mode &c%fly%'
+  Others: '&6Fly mode &c%fly% for &d%target%'
+
+Gamemode: '&6Your gamemode has been changed to &c%gm%'
+Hat: '&6Enjoy your new hat ^^'
+
+Spawn:
+  Wait: '&6You will be teleported in &c%time%'
+  Own: '&6Teleported to spawn'
+  Others: '&c%player% &6took his life'
