@@ -1,5 +1,6 @@
 package me.cadox8.riveth.api;
 
+import lombok.Getter;
 import org.bukkit.OfflinePlayer;
 
 import java.util.ArrayList;
@@ -7,8 +8,9 @@ import java.util.UUID;
 
 public class RServer {
 
-    private static ArrayList<RUser> users = new ArrayList<>();
-    private static ArrayList<RUser> afks = new ArrayList<>();
+    // Just if necessary
+    @Getter private static ArrayList<RUser> users = new ArrayList<>();
+    @Getter private static ArrayList<RUser> afks = new ArrayList<>();
 
     // Users
     public static RUser getUser(OfflinePlayer p) {

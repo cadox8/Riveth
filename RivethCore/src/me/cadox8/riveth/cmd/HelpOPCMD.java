@@ -29,7 +29,7 @@ public class HelpOPCMD extends RCmd {
 
                 String message = Utils.buildString(args);
 
-                RServer.users.forEach(user -> {
+                RServer.getUsers().forEach(user -> {
                     if (user.hasPermission("riveth.helpop")) user.sendRawMessage(" &7|| &cHelpOP &7|| &2" + u.getName() + "&r: " + message);
                 });
 
