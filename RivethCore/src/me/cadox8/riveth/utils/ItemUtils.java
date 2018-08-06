@@ -23,7 +23,7 @@ public class ItemUtils {
         return createPlayerHead(displayname, plugin.getServer().getOfflinePlayer(username).getUniqueId(), lore);
     }
     public static ItemStack createPlayerHead(String displayname, UUID userUUID, List<String> lore) {
-        ItemStack playerHead = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+        ItemStack playerHead = new ItemStack(Material.SKELETON_SKULL, 1, (short) 3);
         SkullMeta sm = (SkullMeta) playerHead.getItemMeta();
         sm.setOwningPlayer(plugin.getServer().getOfflinePlayer(userUUID));
         ArrayList<String> colorLore = new ArrayList<>();
